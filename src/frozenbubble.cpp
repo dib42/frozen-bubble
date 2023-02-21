@@ -27,7 +27,7 @@ uint8_t FrozenBubble::RunForEver()
         std::cout << "Failed to create window: " << SDL_GetError() << std::endl;
     }
 
-    std::string icon_path = std::string(DATADIR) + "/gfx/pinguins/window_icon_penguin.bmp";
+    std::string icon_path = std::string(DATA_DIR) + "/gfx/pinguins/window_icon_penguin.bmp";
     SDL_Surface *icon = SDL_LoadBMP(icon_path.c_str());
     SDL_SetWindowIcon(window, icon);
     SDL_FreeSurface(icon);

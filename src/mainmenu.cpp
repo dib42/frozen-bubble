@@ -11,9 +11,9 @@ MainMenu::MainMenu(const SDL_Renderer *renderer)
         y_start += 56;
     }
 
-    std::string background_path = std::string(DATADIR) + "/gfx/menu/back_start.png";
+    std::string background_path = std::string(DATA_DIR) + "/gfx/menu/back_start.png";
     background = IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), background_path.c_str());
-    std::string fb_logo_path = std::string(DATADIR) + "/gfx/menu/fblogo.png";
+    std::string fb_logo_path = std::string(DATA_DIR) + "/gfx/menu/fblogo.png";
     fb_logo = IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), fb_logo_path.c_str());
     fb_logo_rect.x = 400;
     fb_logo_rect.y = 15;

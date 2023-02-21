@@ -49,7 +49,7 @@ set_property(TARGET frozen-bubble PROPERTY CXX_STANDARD 17)
 set_property(TARGET frozen-bubble PROPERTY CXX_EXTENSIONS OFF)
 
 target_compile_definitions(frozen-bubble
-    PRIVATE DATADIR=\"${CMAKE_SOURCE_DIR}/share\"
+    PRIVATE DATA_DIR=\"${CMAKE_SOURCE_DIR}/share\"
 )
 
 target_include_directories(frozen-bubble

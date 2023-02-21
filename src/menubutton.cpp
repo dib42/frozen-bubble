@@ -5,11 +5,11 @@
 MenuButton::MenuButton(uint32_t x, uint32_t y, const std::string &name, const SDL_Renderer *renderer)
     : isActive(false)
 {
-    std::string icon_path = std::string(DATADIR) + "/gfx/menu/anims/" + name + "_0001.png";
+    std::string icon_path = std::string(DATA_DIR) + "/gfx/menu/anims/" + name + "_0001.png";
     icon = IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), icon_path.c_str());
-    std::string backgroundActive_path = std::string(DATADIR) + "/gfx/menu/txt_" + name + "_over.png";
+    std::string backgroundActive_path = std::string(DATA_DIR) + "/gfx/menu/txt_" + name + "_over.png";
     backgroundActive= IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), backgroundActive_path.c_str());
-    std::string background_path = std::string(DATADIR) + "/gfx/menu/txt_" + name + "_off.png";
+    std::string background_path = std::string(DATA_DIR) + "/gfx/menu/txt_" + name + "_off.png";
     background= IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), background_path.c_str());
     rect.x = x;
     rect.y = y;
