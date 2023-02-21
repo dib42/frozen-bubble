@@ -40,8 +40,8 @@ MenuButton::~MenuButton()
 
 void MenuButton::Render(const SDL_Renderer *renderer) const
 {
-    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), isActive?backgroundActive:background, NULL, &rect);
-    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), icon, NULL, &icon_rect);
+    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), isActive?backgroundActive:background, nullptr, &rect);
+    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), icon, nullptr, &icon_rect);
 }
 
 void MenuButton::Activate()

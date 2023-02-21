@@ -29,8 +29,8 @@ MainMenu::~MainMenu() {
 }
 
 void MainMenu::Render(void) {
-    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), background, NULL, NULL);
-    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), fb_logo, NULL, &fb_logo_rect);
+    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), background, nullptr, nullptr);
+    SDL_RenderCopy(const_cast<SDL_Renderer*>(renderer), fb_logo, nullptr, &fb_logo_rect);
     for (const MenuButton &button : buttons) {
         button.Render(renderer);
     }

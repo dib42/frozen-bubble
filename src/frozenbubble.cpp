@@ -9,12 +9,12 @@ FrozenBubble::FrozenBubble() : IsGameQuit(false)
 FrozenBubble::~FrozenBubble() {
     if(renderer) {
         SDL_DestroyRenderer(renderer);
-        renderer = NULL;
+        renderer = nullptr;
     }
 
     if(window) {
         SDL_DestroyWindow(window);
-        window = NULL;
+        window = nullptr;
     }
 }
 
