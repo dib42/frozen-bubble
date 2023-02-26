@@ -53,7 +53,7 @@ jobs:
           ${{ matrix.platform.msys-env }}-SDL2
 
     - name: Configure CMake
-      run: cmake -B build -G Ninja
+      run: cmake -B build -G 'Ninja Multi-Config'
 
     - name: Build
       run: cmake --build build --config Debug --verbose --parallel
