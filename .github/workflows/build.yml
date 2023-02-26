@@ -19,7 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-        - { name: Ubuntu,            os: ubuntu-latest,  shell: sh }
+        - { name: Ubuntu - gcc,      os: ubuntu-latest,  shell: sh }
+        - { name: Ubuntu - clang,    os: ubuntu-latest,  shell: sh }
         - { name: macOS,             os: macos-latest,   shell: sh }
         - { name: Windows - mingw32, os: windows-latest, shell: 'msys2 {0}', msystem: mingw32, msys-env: mingw-w64-i686 }
         - { name: Windows - mingw64, os: windows-latest, shell: 'msys2 {0}', msystem: mingw64, msys-env: mingw-w64-x86_64 }
@@ -53,7 +54,12 @@ jobs:
           ${{ matrix.platform.msys-env }}-SDL2
 
     - name: Configure CMake
+      if: matrix.platform.name != 'Ubuntu - clang'
       run: cmake -B build -G 'Ninja Multi-Config'
+
+    - name: Configure CMake for Clang
+      if: matrix.platform.name == 'Ubuntu - clang'
+      run: CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -B build -G 'Ninja Multi-Config'
 
     - name: Build
       run: cmake --build build --config Debug --verbose --parallel
