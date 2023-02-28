@@ -1,6 +1,9 @@
 #include "frozenbubble.h"
 #include <iostream>
+#include "highscoremenu.h"
 #include "mainmenu.h"
+#include "oneplayermenu.h"
+#include "twoplayermenu.h"
 
 FrozenBubble::FrozenBubble() : IsGameQuit(false)
 {
@@ -20,7 +23,8 @@ FrozenBubble::~FrozenBubble() {
 
 uint8_t FrozenBubble::RunForEver()
 {
-    window = SDL_CreateWindow("Frozen-Bubble", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+    window = SDL_CreateWindow("Frozen-Bubble", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                              640, 480, 0);
 
     if(!window) {
         IsGameQuit = true;
@@ -40,9 +44,25 @@ uint8_t FrozenBubble::RunForEver()
     }
 
     MainMenu main_menu(renderer);
+    OnePlayerMenu one_player_menu(renderer);
+    TwoPlayerMenu two_player_menu(renderer);
+    HighscoreMenu highscore_menu(renderer);
+
+    MenuType current_menu_type = MAIN_MENU;
+
+    IMenu* menus[9] = {
+        &main_menu,
+        &one_player_menu,
+        &two_player_menu,
+        &main_menu, // FIXME: lan game
+        &main_menu, // FIXME: net game
+        &main_menu, // FIXME: editor
+        &main_menu, // FIXME: graphics
+        &main_menu, // FIXME: keys
+        &highscore_menu
+    };
 
     while(!IsGameQuit) {
-        // handle input
         SDL_Event e;
         while (SDL_PollEvent (&e)) {
             switch(e.type) {
@@ -56,22 +76,18 @@ uint8_t FrozenBubble::RunForEver()
                 }
                 break;
             case SDL_KEYDOWN:
-                switch(e.key.keysym.sym) {
-                    case SDLK_UP:
-                        main_menu.up();
-                        break;
-                    case SDLK_DOWN:
-                        main_menu.down();
-                        break;
+                if((e.key.keysym.sym == SDLK_ESCAPE) && (current_menu_type == MAIN_MENU)) {
+                    IsGameQuit = true;
+                    continue;
                 }
+                current_menu_type = menus[current_menu_type]->handle_key_down_event(e);
                 break;
             }
         }
-        // do magic
-        // render
         SDL_RenderClear(renderer);
-        main_menu.Render();
+        menus[current_menu_type]->Render(renderer);
         SDL_RenderPresent(renderer);
+        SDL_Delay(1);
     }
     return 0;
 }

@@ -40,9 +40,12 @@ endif()
 
 add_executable(frozen-bubble
     src/frozenbubble.cpp
+    src/highscoremenu.cpp
     src/main.cpp
     src/menubutton.cpp
     src/mainmenu.cpp
+    src/oneplayermenu.cpp
+    src/twoplayermenu.cpp
 )
 
 set_property(TARGET frozen-bubble PROPERTY CXX_STANDARD 17)

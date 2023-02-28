@@ -3,19 +3,21 @@
 
 #include <SDL2/SDL.h>
 #include "menubutton.h"
+#include "IMenu.h"
 #include <vector>
 
-class MainMenu final
+class MainMenu final : public IMenu
 {
 public:
     MainMenu(const SDL_Renderer *renderer);
     MainMenu(const MainMenu&) = delete;
     ~MainMenu();
-    void Render(void);
+    void Render(const SDL_Renderer *renderer) const;
+    MenuType handle_key_down_event(const SDL_Event &e);
+
+private:
     void up();
     void down();
-private:
-    const SDL_Renderer *renderer;
     std::vector<MenuButton> buttons;
     SDL_Texture *background;
     SDL_Texture *fb_logo;

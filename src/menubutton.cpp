@@ -2,8 +2,8 @@
 #include <SDL2/SDL_image.h>
 #include <utility>
 
-MenuButton::MenuButton(uint32_t x, uint32_t y, const std::string &name, const SDL_Renderer *renderer)
-    : isActive(false)
+MenuButton::MenuButton(uint32_t x, uint32_t y, const std::string &name, const SDL_Renderer *renderer, MenuType menu_type)
+    : isActive(false), menu_type(menu_type)
 {
     std::string icon_path = std::string(DATA_DIR) + "/gfx/menu/anims/" + name + "_0001.png";
     icon = IMG_LoadTexture(const_cast<SDL_Renderer*>(renderer), icon_path.c_str());
@@ -23,6 +23,7 @@ MenuButton::MenuButton(uint32_t x, uint32_t y, const std::string &name, const SD
 
 MenuButton::MenuButton(MenuButton &&src) noexcept
     : isActive(std::move(src.isActive)),
+    menu_type(std::move(src.menu_type)),
     icon(std::exchange(src.icon, nullptr)),
     icon_rect(std::move(src.icon_rect)),
     backgroundActive(std::exchange(src.backgroundActive, nullptr)),
@@ -52,4 +53,9 @@ void MenuButton::Activate()
 void MenuButton::Deactivate()
 {
     isActive = false;
+}
+
+MenuType MenuButton::get_menu()
+{
+    return menu_type;
 }
